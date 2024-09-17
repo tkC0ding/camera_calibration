@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 chessboard_size = (9, 6)
-square_size = 3.0 #cm
+square_size = 27.5 #mm
 image_path = 'images/'
 image_size = (640, 480) #(w,h)
 
