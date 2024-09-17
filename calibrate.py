@@ -25,3 +25,15 @@ for image in images:
 
     if ret:
         object_points.append(objp)
+
+        criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.01)
+        corners_final = cv2.cornerSubPix(gray, corners, (11, 11), (-1, -1), criteria)
+
+        image_points.append(corners_final)
+
+        iamge = cv2.drawChessboardCorners(frame, chessboard_size, corners_final, ret)
+        cv2.imshow("points", image)
+        if cv2.waitKey(1) & 0xFF == ord("q"):
+            continue
+    else:
+        print("no chessboard corners found")
