@@ -2,12 +2,14 @@ import cv2
 import numpy as np
 import os
 
-chessboard_size = (9, 6)
-square_size = 27.5 #mm
+chessboard_size = (8, 5) #(number_squares_x - 1, number_squares_y - 1)
+square_size = 0.0275 #m
 image_path = 'images/'
 image_size = (640, 480) #(w,h)
 
-objp = np.hstack([np.mgrid[0:chessboard_size[0], 0:chessboard_size[1]].T.reshape(-1, 2), np.zeros((chessboard_size[0]*chessboard_size[1], 1))])*square_size
+objp = np.zeros((chessboard_size[0] * chessboard_size[1], 3), np.float32)
+objp[:, :2] = np.mgrid[0:chessboard_size[1], 0:chessboard_size[0]].T.reshape(-1, 2)
+objp = objp * square_size
 
 object_points = []
 image_points = []
@@ -28,9 +30,9 @@ for image in images:
 
         image_points.append(corners_final)
 
-        iamge = cv2.drawChessboardCorners(frame, chessboard_size, corners_final, ret)
-        cv2.imshow("points", image)
-        cv2.waitKey(500)
+        img = cv2.drawChessboardCorners(frame, chessboard_size, corners_final, ret)
+        cv2.imshow("points", img)
+        cv2.waitKey(1000)
     else:
         print("no chessboard corners found")
 cv2.destroyAllWindows()
