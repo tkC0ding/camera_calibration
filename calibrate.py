@@ -32,11 +32,11 @@ for image in images:
 
         img = cv2.drawChessboardCorners(frame, chessboard_size, corners_final, ret)
         cv2.imshow("points", img)
-        cv2.waitKey(1000)
+        cv2.waitKey(2000)
     else:
         print("no chessboard corners found")
 cv2.destroyAllWindows()
 
 rep, camera_matrix, dist_coeff, rvecs, tvecs = cv2.calibrateCamera(object_points, image_points, image_size, None, None)
 
-np.savez("calibration.npz", camera_matrix=camera_matrix, dist_coeff=dist_coeff, rvecs=rvecs, tvecs=tvecs)
+np.savez("calibration_files/calibration.npz", camera_matrix=camera_matrix, dist_coeff=dist_coeff, rvecs=rvecs, tvecs=tvecs)
