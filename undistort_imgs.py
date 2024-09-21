@@ -22,5 +22,6 @@ for image in images:
     x, y, w, h = roi
     dst = dst[y:y+h, x:x+w]
 
+    cv2.imshow('before', img)
     cv2.imshow('caliresutl2', dst)
     cv2.waitKey(3000)
