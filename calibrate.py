@@ -8,7 +8,7 @@ image_path = 'images/'
 image_size = (640, 480) #(w,h)
 
 objp = np.zeros((chessboard_size[0] * chessboard_size[1], 3), np.float32)
-objp[:, :2] = np.mgrid[0:chessboard_size[1], 0:chessboard_size[0]].T.reshape(-1, 2)
+objp[:, :2] = np.mgrid[0:chessboard_size[0], 0:chessboard_size[1]].T.reshape(-1, 2)
 objp = objp * square_size
 
 object_points = []
@@ -31,8 +31,8 @@ for image in images:
         image_points.append(corners_final)
 
         img = cv2.drawChessboardCorners(frame, chessboard_size, corners_final, ret)
-        cv2.imshow("points", img)
-        cv2.waitKey(2000)
+        #cv2.imshow("points", img)
+        #cv2.waitKey(2000)
     else:
         print("no chessboard corners found")
 cv2.destroyAllWindows()
